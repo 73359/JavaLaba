@@ -3,6 +3,7 @@ import HeroDetail from './HeroDetail'
 import Row from 'react-bootstrap/Row'
 
 
+
 const AllHeroes = () => {
     const heroes = [
       {"id":1,"name":"Bruce Wayne","alias":"Batman","superpower":"Martial Arts","teamID":1},
