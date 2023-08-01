@@ -1,11 +1,14 @@
 import { React, useState } from 'react';
 import { Form, Row, Button } from 'react-bootstrap';
+import { saveHero } from '../services/hero-service';
+import { useNavigate } from "react-router-dom";
 
 const HeroForm = () => {
   const [alias, setAlias] = useState('');
   const [name, setName] = useState('');
   const [ability, setAbility] = useState('');
   const [teamID, setTeamID] = useState(0);
+  const navigate = useNavigate();
 
   const handleAliasChange = (event)=> {
     setAlias(event.target.value);
@@ -28,10 +31,20 @@ const HeroForm = () => {
     let hero = {};
     hero.alias = alias;
     hero.name = name;
-    hero.ability = ability;
+    hero.superpower = ability;
     hero.teamID = teamID;
-    console.log(hero);
-  }
+    saveHero(hero)
+      .then(res => {
+         setAbility('');
+         setAlias('');
+         setName('');
+         setTeamID(0)
+         navigate("/")
+         })
+       .catch(err=>{
+          console.log(err);
+         })   
+   }
 
   return (
     <Row className='heroForm'>
